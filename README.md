@@ -5,6 +5,7 @@ This repo contains a set of example uses of Baleen]. It contains the pipeline an
 
 # Requirements
 
+* This repository uses [Git Large File Storage](https://git-lfs.github.com/) and must be installed to use pre-traned models.
 * Java 8
 * Docker (optional)
 * Baleen - Download from [GitHub](https://github.com/dstl/baleen/releases) or build from source. Name this file baleen.jar and place in this directory (alongside run.sh). Or use in eclipse with Baleen imported. 

@@ -1,0 +1,11 @@
+pipelines:
+- name: structure-annotation
+  file: ./pipelines/structure-pipeline.yml
+- name: record-definition
+  file: ./pipelines/record-definition-pipeline.yml
+- name: record-annotation
+  file: ./pipelines/record-annotation-pipeline.yml
+logging:
+  loggers:
+  - include: ./logging/quite-console.yml
+  - include: ./logging/debug-file.yml

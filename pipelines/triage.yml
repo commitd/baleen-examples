@@ -1,0 +1,15 @@
+mongo:
+  db: baleen
+  host: localhost
+  
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- language.OpenNLP
+- include: ./annotators/triage.yml
+  
+consumers:
+- Mongo
+
+ 

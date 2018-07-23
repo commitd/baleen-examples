@@ -1,0 +1,20 @@
+mongo:
+  db: labelled
+  host: localhost
+
+tasks:
+- class: triage.MalletClassifierTrainer
+  trainer: 
+  - RandomAssignmentTrainer
+  - NaiveBayes
+  - DecisionTree,maxDepth=10
+  - DecisionTree,maxDepth=20
+  - DecisionTree,maxDepth=40
+  - BalancedWinnow
+  - MaxEnt
+  forTesting: 0.2
+  resultFile: ./output/triage/classifyTrials.csv
+  modelFile: ./output/triage/classify
+#  collection: documents
+#  labelField: label
+

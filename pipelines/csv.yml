@@ -1,0 +1,9 @@
+  
+collectionreader:
+- include: ./collectionreaders/example-csv.yml
+  
+annotators:
+- include: ./annotators/basic.yml
+
+consumers:
+- print.Entities

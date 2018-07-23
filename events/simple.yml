@@ -1,0 +1,26 @@
+rules:
+
+- name: event
+  label: Event
+  priority: 2
+  pattern: |
+    trigger = [tag=/^V/]
+    location: Location = >>
+    time: Temporal = >>
+    involved: Entity* = >> [!entity=/Location|Temporal/]
+    
+- name: erte
+  label: Entity
+  priority: 1
+  type: token
+  pattern: [word=/fox|dog/]
+    
+- name: dependency_example
+  label: Event
+  priority: 2
+  pattern: | 
+    trigger = [lemma=jump] 
+    jumper:Entity = nsubj
+    #over: prep [word=/over/] 
+    obstacle:Entity = prep? /obj/
+

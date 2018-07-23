@@ -1,0 +1,4 @@
+- name: console
+  excludeLoggers:
+  - org.reflections.Reflections
+  - history

@@ -1,0 +1,21 @@
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- include: ./annotators/default.yml
+- class: coreference.EntityLinkingAnnotator
+  entityType: Person
+  candidateSupplier: dbpedia.DBPediaPersonCandidateSupplier
+- class: coreference.EntityLinkingAnnotator
+  entityType: Organisation
+  candidateSupplier: dbpedia.DBPediaOrganisationCandidateSupplier
+- class: coreference.EntityLinkingAnnotator
+  entityType: Location
+  candidateSupplier: dbpedia.DBPediaLocationCandidateSupplier 
+
+consumers:
+- Mongo
+
+
+
+ 

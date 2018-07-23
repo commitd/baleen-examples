@@ -1,0 +1,19 @@
+mongo:
+  db: baleen-relations
+  host: localhost
+ 
+# Read in your training data here
+collectionreader:
+  - include: ./collectionreaders/example-files.yml
+ 
+annotators:
+  # Perform your usual entity extraction here e.g.
+  # Ensure Sentence, WordToken and POS extraction.
+  - include: ./annotators/basic.yml
+     
+ # Pattern Extraction
+  - patterns.PatternExtractor
+ 
+consumers:
+  # Save patterns to Mongo
+  - MongoPatternSaver

@@ -1,0 +1,6 @@
+- grammatical.NPAtCoordinate
+- grammatical.NPElement
+- grammatical.NPLocation
+- grammatical.NPOrganisation
+- grammatical.NPTitleEntity
+- grammatical.TOLocationEntity

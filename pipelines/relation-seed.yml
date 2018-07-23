@@ -1,0 +1,12 @@
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- include: ./annotators/basic.yml
+
+- class: renoun.ReNounSeedFactsRelationshipAnnotator
+#  attributesFile: ./renoun/attributes 
+
+consumers:
+- class: csv.Relation
+  filename: ./output/relations/seed.csv

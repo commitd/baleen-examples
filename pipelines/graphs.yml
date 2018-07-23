@@ -1,0 +1,18 @@
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- include: ./annotators/default.yml
+  
+consumers:
+#- class: file.EntityGraph
+- class: file.DocumentGraph
+  outputDirectory: ./output/knowledge/graph
+  format: GRAPHML #other options: GRAPHSON, GYRO
+#- class: file.Rdf
+- class: file.RdfEntityGraph
+  outputDirectory: ./output/knowledge/rdf
+  format: TURTLE #other options RDF_XML, RDF_XML_ABBREV, N_TRIPLES, RDF_JSON, JSONLD, N3
+
+
+ 

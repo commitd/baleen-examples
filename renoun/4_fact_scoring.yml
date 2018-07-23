@@ -1,0 +1,9 @@
+mongo:
+  db: baleen-renoun
+  host: localhost
+  
+tasks:
+- class: renoun.ReNounScoring
+  factCollection: renoun_facts
+  model: ./models/glove.6B.300d.txt
+  

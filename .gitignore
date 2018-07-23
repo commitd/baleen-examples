@@ -1,0 +1,8 @@
+/amazon/
+/jars/
+/models/
+/output/
+.project
+.settings/
+.DS_Store
+*.jar

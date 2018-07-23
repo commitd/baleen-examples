@@ -1,0 +1,29 @@
+
+rabbitmq:
+#  host: localhost
+#  port: 5672
+#  virtualHost: /
+  user: guest
+  pass: guest
+#  https: false
+# Only relevent for http true
+#  trustAll: false
+# Only relevent for http true and trustAll false
+#  sslprotocol: TLSv1.1
+#  keystorePass: 
+#  keystorePath: 
+#  truststorePass: 
+#  truststorePath: 
+ 
+ 
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+  
+consumers:
+- class: uk.gov.dstl.baleen.transports.rabbitmq.RabbitMQTransportSender
+#   topic: transport
+#   capacity:
+#   blacklist:
+#   whitelist:   
+#   exchange:
+#   routingKey

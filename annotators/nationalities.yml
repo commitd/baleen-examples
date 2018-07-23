@@ -1,0 +1,8 @@
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_gdelt/CAMEOreligion.txt
+  type: Nationality
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_gdelt/CAMEOethnic.txt
+  type: Nationality

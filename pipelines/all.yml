@@ -1,0 +1,377 @@
+mongo:
+  db: baleen
+  host: localhost
+
+elasticsearch:
+  cluster: elasticsearch
+  host: localhost
+  
+# Read your data in here
+collectionreader:
+  class: FolderReader
+  folders:
+  - ./corpora/files
+  
+history:
+  class: uk.gov.dstl.baleen.history.mongo.MongoHistory
+ 
+
+annotators:
+- cleaners.AddGenderToPerson
+- cleaners.AddTitleToPerson
+- cleaners.CleanPunctuation
+- cleaners.CleanTemporal
+- cleaners.CollapseLocations
+- cleaners.CorefBrackets
+- cleaners.CorefCapitalisationAndApostrophe
+- cleaners.CurrencyDetection
+- cleaners.EntityInitials
+- cleaners.ExpandLocationToDescription
+- cleaners.MergeAdjacent
+- cleaners.MergeAdjacentQuantities
+- cleaners.MergeNationalityIntoEntity
+- cleaners.NaiveMergeRelations
+- cleaners.NormalizeOSGB
+- cleaners.NormalizeTemporal
+- cleaners.NormalizeWhitespace
+- cleaners.ReferentToEntity
+- cleaners.RelationTypeFilter
+- cleaners.RemoveLowConfidenceEntities
+- cleaners.RemoveNestedEntities
+- cleaners.RemoveNestedLocations
+- cleaners.RemoveOverlappingEntities
+- cleaners.SplitBrackets
+- cleaners.Surname
+- gazetteer.Country
+- class: gazetteer.Mongo
+  type: Buzzword
+  collection: buzzwords
+- class: gazetteer.Mongo
+  type: Location
+  collection: location
+- class: gazetteer.Mongo
+  type: Organisation
+  collection: organisations
+- class: gazetteer.Mongo
+  type: Person
+  collection: people
+- grammatical.NPAtCoordinate
+- grammatical.NPElement
+- grammatical.NPLocation
+- grammatical.NPOrganisation
+- grammatical.NPTitleEntity
+- grammatical.QuantityNPEntity
+- grammatical.TOLocationEntity
+- language.OpenNLP
+- language.OpenNLPParser
+- language.MaltParser
+- misc.GenericMilitaryPlatform
+- misc.GenericVehicle
+- misc.GenericWeapon
+- misc.MentionedAgain
+- misc.NationalityToLocation
+- misc.OrganisationPersonRole
+- misc.People
+- misc.Pronouns
+- regex.Area
+- regex.BritishArmyUnits
+- regex.Callsign
+- regex.CasRegistryNumber
+- regex.Date
+- regex.DateTime
+- regex.Distance
+- regex.DocumentNumber
+- regex.Dtg
+- regex.Email
+- regex.FlightNumber
+- regex.Frequency
+- regex.Hms
+- regex.IpV4
+- regex.LatLon
+- regex.Mgrs
+- regex.Money
+- regex.Nationality
+- regex.Osgb
+- regex.Postcode
+- regex.RelativeDate
+- regex.SocialMediaUsername
+- regex.TaskForce
+- regex.Telephone
+- regex.Time
+- regex.TimeQuantity
+- regex.USTelephone
+- regex.UnqualifiedDate
+- regex.Url
+- regex.Volume
+- regex.Weight
+- stats.DocumentLanguage
+- class: stats.OpenNLP
+  model: ./models/en-ner-location.bin
+  type: Location
+- class: stats.OpenNLP
+  model: ./models/en-ner-organization.bin
+  type: Organisation
+- class: stats.OpenNLP
+  model: ./models/en-ner-person.bin
+  type: Person
+
+#----------------------------------------------------------
+#Custom regex
+    
+## president|President **name** e.g. President Obama
+- class: regex.Custom
+  pattern: "\\b(President|president)\\h[a-zA-Z]*\\b"  
+  type: Person
+## ****stuff**** "family" as organisation. Excluding releative refs, e.g. his,her, a, my
+- class: regex.Custom
+  pattern: "(\\w*(?<!his|a|her|their|my|of))\\b\\h(family)\\b"
+  type: Organisation
+## Camps, forts, bases e.g. Camp Bastion, Bastion Camp, Fort Melbourn etc
+- class: regex.Custom
+  pattern: "([A-Z][a-zA-Z]*)\\s(?i)(camp|fort|Air Port|Air Base|Airforce Base)(?-i)|((?i)(camp|fort|FOB)(?-i)\\s([A-Z][a-zA-Z]*))"
+  type: Location
+## "University of ...."", ""... University"
+- class: regex.Custom
+  pattern: "((((?i)\\b(university of)(?-i))\\h[A-Z][a-zA-Z]*)|(([A-Z][a-zA-Z]*)\\h(?i)(university)(?-i)))"
+  type: Organisation
+##"City of ....", "...city"
+- class: regex.Custom
+  pattern: "((((?i)\\b(city of)(?-i))\\h[A-Z][a-zA-Z]*)|(([A-Z][a-zA-Z]*)\\h(?i)(city)(?-i)))"
+  type: Location
+## Ship and maritime vehicle Types
+- class: regex.Custom
+  pattern: "(?i)\\b(AHT|AHTS|AOR|ATB|CRV|C\\/F|CS|DB|DEPV|DLB|DCV|DSV|DV|ERRV|FPSO|FPV|FPV|FT|FV|GTS|HLV|HSC|HSF|HTV|IRV|ITB|LB|LNG\\/C|LPG\\/C|MF|MFV|MS (M\\/S)|MSV|MSY|MT|MTS|MV (M\\/V)|MY|NB|NRV|NS|OSV|PS|PSV|QSMV|QTEV|RMS|RNLB|RV|RSV|SB|SS|S\\/S|SSCV|SSS|SSV|ST|STS|STV|SV|S\\/V|SY|TB|TEV|TIV|TrSS|TS|Tr\\.SMV|TSMV|TSS|TV)(?-i)\\s([A-Z][a-zA-Z]*)\\b"
+  type: Vehicle         
+
+#----------------------------------------------------------
+#Gazetteers
+## Countries
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_gdelt/FIPScountry.txt
+  type: Location
+##Places e.g. towns, vilages, regions
+  type: Location
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/locations_places/iraq_cites_towns_villiages.txt
+  type: Location
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/locations_places/iraq_districts.txt
+  type: Location
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/locations_places/syria_cites_towns_villiages.txt
+  type: Location
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/locations_places/syria_districts.txt
+  type: Location
+
+#Nationalites
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_gdelt/CAMEOreligion.txt
+  type: Nationality
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_gdelt/CAMEOethnic.txt
+  type: Nationality
+
+#People
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/people/List_of_Syrians.txt
+  type: Person
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/people/List_of_Iraqis.txt
+  type: Person
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/people/List_of_current_United_Kingdom_MPs.txt
+  type: Person
+
+#Organistions
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_gdelt/CAMEOknowngroup.txt
+  type: Organisation
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/organisations/List_of_designated_terrorist_groups.txt
+  type: Organisation
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/organisations/List_of_news_agencies.txt
+  type: Organisation
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/organisations/List_of_news_television_channels.txt
+  type: Organisation
+
+#Weapons
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_assault_rifles.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_battle_rifles.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_blow-forward_firearms.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_bullpup_firearms.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_carbines.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_delayed-blowback_firearms.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_grenade_launchers.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_machine_guns.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_military_rockets.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_multiple-barrel_firearms.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_pistols.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_recoilless_rifles.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_revolvers.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_rocket_aircraft.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_shotguns.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_sniper_rifles.txt
+  type: Weapon
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/weapons/List_of_submachine_guns.txt
+  type: Weapon
+
+#Military platforms
+#Aircraft
+  type: MilitaryPlatform
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/military_platforms/List_of_active_aircraft_of_the_Turkish_Air_Force.txt
+  type: MilitaryPlatform
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/military_platforms/List_of_active_Peoples_Liberation_Army_aircraft.txt
+  type: MilitaryPlatform
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/military_platforms/List_of_active_Russian_military_aircraft.txt
+  type: MilitaryPlatform
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/military_platforms/List_of_active_United_Kingdom_military_aircraft.txt
+  type: MilitaryPlatform
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/military_platforms/List_of_active_United_States_military_aircraft.txt
+  type: MilitaryPlatform
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/military_platforms/List_of_aircraft_of_the_Israeli_Air_Force.txt
+  type: MilitaryPlatform
+- class: gazetteer.File
+  caseSensitive: true
+  fileName: ./gazetteers/source_wikipedia/military_platforms/List_of_military_platforms.txt
+  type: MilitaryPlatform
+
+#Coreference
+- coreference.SieveCoreference
+
+#Relations
+- class: relations.SentenceRelationshipAnnotator
+  valueStrategy: BETWEEN
+- class: relations.DocumentRelationshipAnnotator
+- class: relations.DependencyRelationshipAnnotator
+- class: relations.NPVNP
+  onlyExisting: true
+- class: relations.SimpleInteraction
+- class: relations.RegExRelationshipAnnotator
+  pattern: "(:Person:).*(visit\\w*|went to).*(:Location:)"
+  sourceGroup: 1
+  valueGroup: 2
+  targetGroup: 3
+  type: locatedAt
+- class: relations.RegExRelationshipAnnotator
+  pattern: "(:Person:).*(:Person:)"
+  type: associated
+- class: relations.RegExRelationshipAnnotator
+  pattern: "(:Person:)\\s+<(:CommsIdentifier:)>"
+  type: hasIdentifier
+- class: relations.PartOfSpeechRelationshipAnnotator
+  pattern: "(NNP).*(VBD).*(NNP)"
+  sourceGroup: 1
+  valueGroup: 2
+  targetGroup: 3
+- class: relations.PartOfSpeechRelationshipAnnotator
+  pattern: "the (.+) of ((?:NNP ?)+) is ((?:NNP ?)+)"
+  stopWords: 
+    - the
+    - of
+    - is
+  sourceGroup: 2
+  valueGroup: 1
+  targetGroup: 3
+- class: renoun.ReNounRelationshipAnnotator
+  factCollection: renoun_facts
+  attributeFile: ./renoun/attributes  
+
+#Triage
+- class: triage.CommonKeywords
+  stemming: ENGLISH
+- class: triage.RakeKeywords
+  stemming: ENGLISH
+- class: triage.ShannonEntropyAnnotator
+- class: triage.WordDistributionDocumentSummary
+- class: TopicModel
+  modelPath: ./trained/topic.mallet
+- class: triage.MalletClassifier
+  modelPath: ./trained/classify.mallet
+- class: triage.MalletClassifier
+  modelPath: ./trained/maxent.mallet
+
+consumers:
+- class: Mongo
+  outputHistory: true
+- MongoRelations
+- Elasticsearch
+- LocationElasticsearch
+- TemporalElasticsearch

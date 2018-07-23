@@ -1,0 +1,12 @@
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/locations_places/syria_cites_towns_villiages.txt
+  type: Location
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/locations_places/syria_districts.txt
+  type: Location
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/people/List_of_Syrians.txt
+  type: Person

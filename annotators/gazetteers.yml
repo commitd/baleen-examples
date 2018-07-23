@@ -1,0 +1,21 @@
+- gazetteer.Country
+- class: gazetteer.Mongo
+  type: Buzzword
+  collection: buzzwords
+- class: gazetteer.Mongo
+  type: Location
+  collection: location
+- class: gazetteer.Mongo
+  type: Organisation
+  collection: organisations
+- class: gazetteer.Mongo
+  type: Person
+  collection: people
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_gdelt/FIPScountry.txt
+  type: Location
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/people/List_of_current_United_Kingdom_MPs.txt
+  type: Person

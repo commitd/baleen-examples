@@ -1,0 +1,41 @@
+- misc.OrganisationPersonRole
+- grammatical.QuantityNPEntity
+
+- class: relations.SentenceRelationshipAnnotator
+  valueStrategy: BETWEEN
+- class: relations.DocumentRelationshipAnnotator
+- class: relations.DependencyRelationshipAnnotator
+
+- class: relations.NPVNP
+  onlyExisting: true
+- class: relations.SimpleInteraction
+
+- class: relations.RegExRelationshipAnnotator
+  pattern: "(:Person:).*(visit\\w*|went to).*(:Location:)"
+  sourceGroup: 1
+  valueGroup: 2
+  targetGroup: 3
+  type: locatedAt
+- class: relations.RegExRelationshipAnnotator
+  pattern: "(:Person:).*(:Person:)"
+  type: associated
+- class: relations.RegExRelationshipAnnotator
+  pattern: "(:Person:)\\s+<(:CommsIdentifier:)>"
+  type: hasIdentifier
+- class: relations.PartOfSpeechRelationshipAnnotator
+  pattern: "(NNP).*(VBD).*(NNP)"
+  sourceGroup: 1
+  valueGroup: 2
+  targetGroup: 3
+- class: relations.PartOfSpeechRelationshipAnnotator
+  pattern: "the (.+) of ((?:NNP ?)+) is ((?:NNP ?)+)"
+  stopWords: 
+    - the
+    - of
+    - is
+  sourceGroup: 2
+  valueGroup: 1
+  targetGroup: 3
+- class: renoun.ReNounRelationshipAnnotator
+  factCollection: renoun_facts
+  attributeFile: ./renoun/attributes  

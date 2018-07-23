@@ -1,0 +1,32 @@
+mongo:
+  db: baleen-renoun
+  host: localhost
+ 
+# Read your corpus here
+collectionreader:
+ - include: ./collectionreaders/example-files.yml
+
+ 
+annotators:
+# Ensure the language pasring is done in the pipleine (done in default here)
+#- language.OpenNLP
+#- language.MaltParser
+
+# Perform your usual entity extraction here e.g.
+- include:
+  - ./annotators/basic.yml
+  - ./annotators/nationalities.yml
+  - ./annotators/organisations.yml
+  - ./annotators/stats.yml
+  - ./annotators/coreference.yml
+
+     
+# ReNoun Seed Fact Extraction
+- class: renoun.ReNounDefaultSeedsRelationshipAnnotator
+#  attributesFile: ./renoun/attributes 
+
+ 
+# Save relations to Mongo
+consumers:
+- class: MongoRelations
+  collection: seedFacts

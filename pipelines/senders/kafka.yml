@@ -1,0 +1,16 @@
+
+kafka:
+#  host: localhost
+#  port: 9092
+#  consumerGroupId: 1
+
+ 
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+  
+consumers:
+- class: uk.gov.dstl.baleen.transports.kafka.KafkaTransportSender
+#   topic: transport
+#   capacity:
+#   blacklist:
+#   whitelist: 

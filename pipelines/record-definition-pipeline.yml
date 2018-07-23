@@ -1,0 +1,51 @@
+collectionreader:
+  class: FolderReader
+  folders:
+  - ./templates/recordDefinitionInput
+
+annotators:
+- language.OpenNLP
+- templates.TemplateFieldDefinitionAnnotator
+- templates.TemplateRecordDefinitionAnnotator
+
+consumers:
+- print.Structures
+- print.Selectors
+- class: template.TemplateRecordConfigurationCreatingConsumer
+  outputDirectory: ./templates/recordDefinitions
+  types: 
+    - Anchor
+    - Aside
+    - Caption
+    - DefinitionDescription            
+    - DefinitionItem                   
+    - DefinitionList                   
+    - Details
+    - Document
+    - SlideShow
+    - SpreadSheet
+    - TextDocument
+    - Figure
+    - Footer
+    - Header
+    - Heading
+    - Link
+    - ListItem
+    - Ordered
+    - Page
+    - Sheet
+    - Slide
+    - Paragraph
+    - Preformatted
+    - Quotation
+    - Section
+    - Sentence
+    - Style
+    - Summary
+    - Table
+    - TableBody
+    - TableCell
+    - TableFooter
+    - TableHeader
+    - TableRow
+    - Unordered

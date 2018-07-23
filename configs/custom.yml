@@ -1,0 +1,7 @@
+pipelines:
+- name: custom
+  file: ./pipelines/custom.yml
+logging:
+  loggers:
+  - include: ./logging/quite-console.yml
+  - include: ./logging/debug-file.yml

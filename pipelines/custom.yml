@@ -1,0 +1,25 @@
+mongo:
+  db: baleen
+  host: localhost
+
+elasticsearch:
+  cluster: docker-cluster
+  host: localhost
+  port: 9300
+ 
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+  
+history:
+  class: uk.gov.dstl.baleen.history.mongo.MongoHistory
+ 
+
+annotators:
+- include: ./annotators/full.yml
+
+consumers:
+- class: Mongo
+#  outputHistory: true
+#- Elasticsearch
+#- LocationElasticsearch
+#- TemporalElasticsearch

@@ -1,0 +1,25 @@
+ 
+collectionreader:
+  class: uk.gov.dstl.baleen.transports.memory.MemoryTransportReceiver 
+#   topic: transport
+#   blacklist:
+#   whitelist: 
+
+mongo:
+#  db: baleen
+#  host: localhost
+#  user:
+#  pass:
+
+elasticsearch:
+#  host: localhost
+#  port: 9300
+#  cluster: elasticsearch
+  
+annotators:
+- include: ./annotators/default.yml
+
+consumers:
+- Mongo
+#- Elasticsearch
+ 

@@ -1,0 +1,7 @@
+pipelines:
+- name: receiver
+  multiplicity: 4
+  file: ./pipelines/receivers/kafka.yml
+logging:
+  loggers:
+  - include: ./logging/quite-console.yml

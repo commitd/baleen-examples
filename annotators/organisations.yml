@@ -1,0 +1,16 @@
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_gdelt/CAMEOknowngroup.txt
+  type: Organisation
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/organisations/List_of_designated_terrorist_groups.txt
+  type: Organisation
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/organisations/List_of_news_agencies.txt
+  type: Organisation
+- class: gazetteer.File
+  caseSensitive: false
+  fileName: ./gazetteers/source_wikipedia/organisations/List_of_news_television_channels.txt
+  type: Organisation

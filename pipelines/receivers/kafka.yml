@@ -1,0 +1,33 @@
+
+kafka:
+#  host: localhost
+#  port: 9092
+#  consumerGroupId: 1
+
+ 
+collectionreader:
+  class: uk.gov.dstl.baleen.transports.kafka.KafkaTransportReceiver 
+#  topic: transport
+#  blacklist:
+#  whitelist: 
+#  timeout: 1000
+#  maxPollDocs: 1
+#  offset: earliest
+  
+mongo:
+#  db: baleen
+#  host: localhost
+#  user:
+#  pass:
+
+elasticsearch:
+#  host: localhost
+#  port: 9300
+#  cluster: elasticsearch
+  
+annotators:
+- include: ./annotators/default.yml
+
+consumers:
+- Mongo
+#- Elasticsearch

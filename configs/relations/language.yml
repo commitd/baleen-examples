@@ -1,0 +1,9 @@
+pipelines:
+- name: relation-baseline
+  file: ./pipelines/relation-language.yml
+logging:
+  loggers:
+   - name: console
+     excludeLoggers:
+     - org.reflections.Reflections
+     - history

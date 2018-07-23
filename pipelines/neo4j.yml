@@ -1,0 +1,27 @@
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- include: ./annotators/default.yml
+
+
+consumers:
+#- class: graph.Neo4JDocumentGraphConsumer
+- class: graph.Neo4JEntityGraphConsumer
+  #closeAfterEveryDocument: true
+  #url: bolt://localhost
+  #username: neo4j
+  password: neopass
+  filterFeatures:
+   - isNormalised
+  valueStrategy: 
+   - gender
+   - Mode
+   - geoJson
+   - Mode
+   - type
+   - Mode
+   - relationshipType
+   - Mode
+
+ 

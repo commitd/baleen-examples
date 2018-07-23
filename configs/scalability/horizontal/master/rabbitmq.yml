@@ -1,0 +1,10 @@
+pipelines:
+# Optional reciever on master
+#- name: receiver
+#  multiplicity: 2
+#  file: ./pipelines/receivers/rabbitmq.yml
+- name: sender
+  file: ./pipelines/senders/rabbitmq.yml
+logging:
+  loggers:
+  - include: ./logging/quite-console.yml

@@ -1,0 +1,27 @@
+collectionreader:
+- include: ./collectionreaders/example-events.yml
+
+annotators:
+- include: 
+  - ./annotators/language.yml
+  - ./annotators/cleaners.yml
+  - ./annotators/gazetteers.yml
+  - ./annotators/grammatical.yml
+  - ./annotators/misc.yml
+  - ./annotators/regex.yml
+  - ./annotators/opennlp.yml
+  - ./annotators/nationalities.yml
+  - ./annotators/organisations.yml
+  - ./annotators/stats.yml
+  - ./annotators/coreference.yml
+
+- class: events.Odin
+  rules: ./events/simple.yml
+#  types: 
+#    - Event 
+#    - Entity 
+
+consumers:
+#- class: Mongo
+#- class: MongoEvents
+- class: print.Events

@@ -1,0 +1,12 @@
+mongo:
+  db: baleen
+  host: localhost
+
+tasks:
+- class: triage.TopicModelTrainer
+  modelFile: ./output/triage/topic.mallet
+  numTopics: 10
+# numIterations: 1000
+# numThreads: 2
+# collection: documents
+# field: content

@@ -1,0 +1,7 @@
+mongo:
+  db: baleen-relations
+  host: localhost
+  
+tasks:
+- class: interactions.UploadInteractionsToMongo
+  input: ./output/relations/interactions-enhanced.csv

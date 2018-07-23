@@ -1,0 +1,24 @@
+## president|President **name** e.g. President Obama
+- class: regex.Custom
+  pattern: "\\b(President|president)\\h[a-zA-Z]*\\b"  
+  type: Person
+## ****stuff**** "family" as organisation. Excluding releative refs, e.g. his,her, a, my
+- class: regex.Custom
+  pattern: "(\\w*(?<!his|a|her|their|my|of))\\b\\h(family)\\b"
+  type: Organisation
+## Camps, forts, bases e.g. Camp Bastion, Bastion Camp, Fort Melbourn etc
+- class: regex.Custom
+  pattern: "([A-Z][a-zA-Z]*)\\s(?i)(camp|fort|Air Port|Air Base|Airforce Base)(?-i)|((?i)(camp|fort|FOB)(?-i)\\s([A-Z][a-zA-Z]*))"
+  type: Location
+## "University of ...."", ""... University"
+- class: regex.Custom
+  pattern: "((((?i)\\b(university of)(?-i))\\h[A-Z][a-zA-Z]*)|(([A-Z][a-zA-Z]*)\\h(?i)(university)(?-i)))"
+  type: Organisation
+##"City of ....", "...city"
+- class: regex.Custom
+  pattern: "((((?i)\\b(city of)(?-i))\\h[A-Z][a-zA-Z]*)|(([A-Z][a-zA-Z]*)\\h(?i)(city)(?-i)))"
+  type: Location
+## Ship and maritime vehicle Types
+- class: regex.Custom
+  pattern: "(?i)\\b(AHT|AHTS|AOR|ATB|CRV|C\\/F|CS|DB|DEPV|DLB|DCV|DSV|DV|ERRV|FPSO|FPV|FPV|FT|FV|GTS|HLV|HSC|HSF|HTV|IRV|ITB|LB|LNG\\/C|LPG\\/C|MF|MFV|MS (M\\/S)|MSV|MSY|MT|MTS|MV (M\\/V)|MY|NB|NRV|NS|OSV|PS|PSV|QSMV|QTEV|RMS|RNLB|RV|RSV|SB|SS|S\\/S|SSCV|SSS|SSV|ST|STS|STV|SV|S\\/V|SY|TB|TEV|TIV|TrSS|TS|Tr\\.SMV|TSMV|TSS|TV)(?-i)\\s([A-Z][a-zA-Z]*)\\b"
+  type: Vehicle         

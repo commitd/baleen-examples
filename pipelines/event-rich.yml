@@ -1,0 +1,49 @@
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- include: 
+  - ./annotators/language-odin.yml
+  - ./annotators/cleaners.yml
+  - ./annotators/gazetteers.yml
+  - ./annotators/grammatical.yml
+  - ./annotators/misc.yml
+  - ./annotators/regex.yml
+  - ./annotators/opennlp.yml
+  - ./annotators/nationalities.yml
+  - ./annotators/organisations.yml
+  - ./annotators/stats.yml
+  - ./annotators/coreference.yml
+- class: gazetteer.List
+  type: Person
+  terms:
+  - Donald Trump, Mr Trump, President Trump, Trump
+  - Mr Cox
+  - Miss Jones
+  - Ash Carter
+- class: gazetteer.List
+  type: Organisation
+  terms:
+  - RAF
+  - Airbus
+  - Dae'sh, Daesh, Da'esh
+  - ISIS
+  - ISIL
+- class: gazetteer.List
+  type: Location
+  terms:
+  - Kent
+  - Wales
+  - Najaf
+  
+
+- class: events.Odin
+  rules: ./events/rich.yml
+#  types: 
+#    - Event 
+#    - Entity 
+
+consumers:
+#- class: Mongo
+#- class: MongoEvents
+- class: print.Events

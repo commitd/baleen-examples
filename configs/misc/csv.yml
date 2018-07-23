@@ -1,0 +1,9 @@
+pipelines:
+- name: csv
+  file: ./pipelines/csv.yml
+logging:
+  loggers:
+   - name: console
+     excludeLoggers:
+     - org.reflections.Reflections
+     - history

@@ -1,0 +1,6 @@
+- include: 
+  - ./annotators/default.yml
+  - ./annotators/custom.yml
+  - ./annotators/military.yml
+  - ./annotators/iraq.yml
+  - ./annotators/syria.yml

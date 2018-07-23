@@ -1,0 +1,11 @@
+ 
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+  
+consumers:
+- class: uk.gov.dstl.baleen.transports.memory.MemoryTransportSender
+#   topic: transport
+#   capacity:
+#   blacklist:
+#   whitelist: 
+ 

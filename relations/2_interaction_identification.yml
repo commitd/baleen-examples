@@ -1,0 +1,8 @@
+mongo:
+  db: baleen-relations
+  host: localhost
+ 
+
+tasks:
+- class: interactions.IdentifyInteractions
+  filename: ./output/relations/interactions.csv

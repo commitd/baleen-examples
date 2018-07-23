@@ -1,0 +1,14 @@
+
+- class: triage.CommonKeywords
+  stemming: ENGLISH
+- class: triage.RakeKeywords
+  stemming: ENGLISH
+- class: triage.ShannonEntropyAnnotator
+- class: triage.WordDistributionDocumentSummary
+#  summaryCharacterCount: 100
+- class: triage.TopicModel
+  modelFile: ./trained/topic.mallet
+- class: triage.MalletClassifier
+  modelFile: ./trained/classify.mallet
+- class: triage.MalletClassifier
+  modelFile: ./trained/maxent.mallet

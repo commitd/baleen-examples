@@ -1,0 +1,9 @@
+jobs:
+- name: topic-trainer
+  file: ./pipelines/training/topic.yml
+logging:
+  loggers:
+   - name: console
+     excludeLoggers:
+     - org.reflections.Reflections
+     - history

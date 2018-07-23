@@ -1,0 +1,22 @@
+mongo:
+  db: baleen-renoun
+  host: localhost
+ 
+# Supply the default document of fact sentences
+collectionreader:
+ class: renoun.ReNounSeedDocument
+
+ 
+annotators:
+# Ensure the language pasring is done in the pipeline
+- language.OpenNLP
+- language.MaltParser
+     
+# ReNoun Seed Fact Extraction
+- class: renoun.ReNounSeedGenerator
+  ouputCollection: seedPatterns
+ 
+# Save relations to Mongo
+consumers:
+- class: MongoRelations
+  collection: seeds

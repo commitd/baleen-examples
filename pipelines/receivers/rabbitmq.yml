@@ -1,0 +1,41 @@
+
+rabbitmq:
+#  host: localhost
+#  port: 5672
+#  virtualHost: /
+  user: guest
+  pass: guest
+#  https: false
+# Only relevent for http true
+#  trustAll: false
+# Only relevent for http true and trustAll false
+#  sslprotocol: TLSv1.1
+#  keystorePass: 
+#  keystorePath: 
+#  truststorePass: 
+#  truststorePath: 
+ 
+ 
+collectionreader:
+  class: uk.gov.dstl.baleen.transports.rabbitmq.RabbitMQTransportReceiver 
+#   topic: transport
+#   blacklist:
+#   whitelist: 
+  
+mongo:
+#  db: baleen
+#  host: localhost
+#  user:
+#  pass:
+
+elasticsearch:
+#  host: localhost
+#  port: 9300
+#  cluster: elasticsearch
+  
+annotators:
+- include: ./annotators/default.yml
+
+consumers:
+- Mongo
+#- Elasticsearch

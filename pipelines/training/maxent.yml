@@ -1,0 +1,12 @@
+mongo:
+  db: baleen
+  host: localhost
+
+tasks:
+- class: triage.MaxEntClassifierTrainer
+  labelsFile: ./pipelines/training/labels
+  modelFile: ./output/triage/maxent.mallet
+# numIterations: 1000
+# variance: 1.0
+# collection: documents
+# field: content

@@ -1,0 +1,8 @@
+- include: 
+  - ./annotators/cleaners.yml
+  - ./annotators/gazetteers.yml
+  - ./annotators/grammatical.yml
+  - ./annotators/language.yml
+  - ./annotators/misc.yml
+  - ./annotators/regex.yml
+  - ./annotators/opennlp.yml

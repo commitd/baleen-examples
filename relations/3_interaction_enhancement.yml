@@ -1,0 +1,4 @@
+tasks:
+- class: interactions.EnhanceInteractions
+  input: ./output/relations/interactions.csv
+  output: ./output/relations/interactions-enhanced.csv

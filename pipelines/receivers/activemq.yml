@@ -1,0 +1,33 @@
+
+activemq:
+#  host: localhost
+#  port: 61616
+#  protocol: tcp
+#  brokerargs: 
+#  topic: baleen
+#  user:
+#  pass:
+ 
+collectionreader:
+  class: uk.gov.dstl.baleen.transports.activemq.ActiveMQTransportReceiver 
+#   topic: transport
+#   blacklist:
+#   whitelist: 
+
+mongo:
+#  db: baleen
+#  host: localhost
+#  user:
+#  pass:
+
+elasticsearch:
+#  host: localhost
+#  port: 9300
+#  cluster: elasticsearch
+  
+annotators:
+- include: ./annotators/default.yml
+
+consumers:
+- Mongo
+#- Elasticsearch

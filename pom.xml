@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<groupId>io.committed.baleen</groupId>
+	<artifactId>baleen-examples</artifactId>
+	<name>Baleen Example PipeLines</name>
+	<version>2.6.0-SNAPSHOT</version>
+
+	<properties>
+		<baleen.version>2.6.0-SNAPSHOT</baleen.version>
+	</properties>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+        <!-- 
+					<execution>
+						<id>copy-baleen-beta-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}</outputDirectory>
+							<resources>
+								<resource>
+
+									<directory>../baleen/beta/baleen-beta-runner/target/</directory>
+									<includes>
+										<include>baleen-beta-${baleen.version}.jar</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+          --> 
+					<execution>
+						<id>copy-baleen-jar-original</id>
+						<!-- here the phase you need -->
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../baleen/target/</directory>
+									<includes>
+										<include>baleen-${baleen.version}.jar</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.coderplus.maven.plugins</groupId>
+				<artifactId>copy-rename-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>copy-and-rename-file</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<sourceFile>${project.basedir}/baleen-${baleen.version}.jar</sourceFile>
+							<!-- <sourceFile>${project.basedir}/baleen-beta-${baleen.version}.jar</sourceFile> -->
+							<destinationFile>${project.basedir}/baleen.jar</destinationFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

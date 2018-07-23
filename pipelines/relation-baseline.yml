@@ -1,0 +1,18 @@
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- include: ./annotators/basic.yml
+
+- class: relations.SentenceRelationshipAnnotator
+  valueStrategy: DEPENDENCY, #other options BETWEEN, SENTENCE 
+- class: relations.DocumentRelationshipAnnotator
+  threshold: 5
+  typeNames:
+  - Person
+  - Organisation
+- class: relations.DependencyRelationshipAnnotator
+
+consumers:
+- class: csv.Relation
+  filename: ./output/relations/baseline.csv

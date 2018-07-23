@@ -1,0 +1,12 @@
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- include: ./annotators/default.yml
+  
+consumers:
+#- class: graph.DocumentGraphConsumer
+- class: graph.EntityGraphConsumer
+  graphConfig: ./graph/orient.properties 
+
+ 

@@ -1,0 +1,34 @@
+mongo:
+  db: baleen-relations
+  host: localhost
+
+elasticsearch:
+  cluster: elasticsearch
+  host: localhost
+  
+# Read your data in here
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+ 
+annotators:
+  # Perform your usual entity extraction, cleaning and coreference here e.g.
+- include: ./annotators/basic.yml
+
+- class: relations.NPVNP
+  onlyExisting: true
+
+  # Interaction Extraction
+- class: gazetteer.MongoStemming
+  collection: interactions
+  type: Interaction
+    
+  # Clean Interactions
+- interactions.RemoveInteractionInEntities
+- interactions.AssignTypeToInteraction
+  
+  # Extract Relationships
+- relations.UbmreDependency   # UbmreDependency is used here, but you could also use SimpleInteraction of UbmreConstituent
+
+consumers:
+  # Persist to your data store
+- MongoRelations

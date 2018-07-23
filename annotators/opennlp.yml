@@ -1,0 +1,9 @@
+- class: stats.OpenNLP
+  model: ./models/en-ner-location.bin
+  type: Location
+- class: stats.OpenNLP
+  model: ./models/en-ner-organization.bin
+  type: Organisation
+- class: stats.OpenNLP
+  model: ./models/en-ner-person.bin
+  type: Person

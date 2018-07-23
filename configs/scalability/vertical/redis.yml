@@ -1,0 +1,9 @@
+pipelines:
+- name: receiver
+  multiplicity: 2
+  file: ./pipelines/receivers/redis.yml
+- name: sender
+  file: ./pipelines/senders/redis.yml
+logging:
+  loggers:
+  - include: ./logging/quite-console.yml

@@ -1,0 +1,8 @@
+- include: 
+  - ./annotators/basic.yml
+  - ./annotators/nationalities.yml
+  - ./annotators/organisations.yml
+  - ./annotators/stats.yml
+  - ./annotators/coreference.yml
+  - ./annotators/relations.yml
+  - ./annotators/triage.yml

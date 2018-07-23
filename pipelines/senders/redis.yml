@@ -1,0 +1,15 @@
+
+redis:
+#  host: localhost
+#  port: 6379
+ 
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+  
+consumers:
+- class: uk.gov.dstl.baleen.transports.redis.RedisTransportSender
+#  topic: transport
+#  capacity:
+#  blacklist:
+#  whitelist: 
+ 

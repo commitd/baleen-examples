@@ -1,0 +1,5 @@
+- name: baleen.log
+  file: ./output/log/baleen.log
+  excludeLoggers:
+  - org.reflections.Reflections
+  - history

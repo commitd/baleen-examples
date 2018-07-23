@@ -1,0 +1,5 @@
+- class: LineReader
+  file: ./corpora/csv/news_summary.csv
+  contentExtractor: CsvContentExtractor
+  contentColumn: 6
+  columns: text

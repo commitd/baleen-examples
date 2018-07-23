@@ -1,0 +1,21 @@
+mongo:
+  db: baleen-renoun
+  host: localhost
+ 
+# Read your corpus here
+collectionreader:
+  class: FolderReader
+  folders:
+  - ./files
+ 
+annotators:
+- language.OpenNLP
+- language.MaltParser
+ 
+    
+# ReNoun Pattern Learning
+- class: renoun.ReNounPatternDataGenerator
+  collection: seedFacts
+# ouputCollection: custom 
+
+ 

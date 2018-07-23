@@ -1,0 +1,135 @@
+taxonomy:
+- List
+- Meeting
+- Communitation
+- Actor
+- Number
+- Quote
+- Group
+- Effect:
+  - Killing
+
+rules:
+- name: numbers
+  label: Number
+  priority: 1
+  type: token
+  pattern: |
+    [tag=CD]
+
+- name: single-quotes
+  label: Quote
+  priority: 1
+  type: token
+  pattern: /[']/ /[^']+/+ /[']/
+      
+- name: double-quotes
+  label: Quote
+  priority: 1
+  type: token
+  pattern: /["]/ /[^"]+/+ /["]/
+  
+- name: group
+  label: Group
+  priority: 2
+  keep: false
+  pattern: |
+    trigger = [lemma=/people|civilian/]
+    number: Number = /num/
+    
+- name: actor
+  label: Actor
+  priority: 2
+  type: token
+  pattern: |
+      [entity=/Person|Organisation/]
+     
+- name: list
+  label: List
+  priority: 2
+  type: token
+  pattern: |
+     @item:Entity ("," @item:Entity)+ (and @item:Entity)?
+
+- name: said
+  label: Communitation
+  priority: 3
+  pattern: |
+    trigger = [tag=/^V/ & lemma=/say|declare/ & !outgoing=neg]
+    subject: Actor = nsubj 
+    quote: Quote = >> | <<
+    
+- name: killed
+  label: Killing
+  priority: 3
+  pattern: |
+    trigger = [lemma=/kill/]
+    subject: Actor? = /nsubj/
+    target: Group = dobj
+
+- name: event
+  label: Event
+  priority: 2
+  pattern: |
+    trigger = [tag=/^V/]
+    time: Temporal+ = >>
+    location: Location+ = >>
+    involved: Entity* = >> [!entity=/Location|Temporal/]
+
+- name: meeting
+  label: Meeting
+  priority: 3
+  pattern: |
+    trigger = [tag=/^V/ & lemma=/met|meet|gather|host|assemble/ & !mention=Meeting]
+    subject: Actor = nsubj prep? pobj?
+    object: Actor? = dobj
+    participant: Actor* = /nsubj|dobj/ prep? pobj? /appos|conj/
+    location: Location? = xcomp? prep pobj
+    time: Temporal? = xcomp? prep pobj
+
+- name: meeting-of
+  label: Meeting
+  priority: 3
+  pattern: |
+    trigger = [lemma=/met|meet|gather|host|assemble/ & !mention=Meeting]
+    subject: Actor = (prep pobj nn) | (prep obj) | (/nmod/ compound|amon)
+    
+- name: meeting-located
+  label: Meeting
+  priority: 3
+  pattern: |
+    trigger = [tag=/^V/ & lemma=/take|took/]
+    subject: Meeting = nsubj
+    object: Actor? = dobj
+    participant: Actor* = /nsubj|dobj/ prep? pobj? /appos|conj/
+    location: Location = xcomp? prep pobj
+    time: Temporal? = xcomp? prep pobj
+      
+- name: communicating
+  label: Communitation
+  priority: 3
+  pattern: |
+    trigger = [tag=/^V/ & lemma=/talk|speak|argue|chat|communicate|tell|converse|say|shout|utter|discus/]
+    participant: Actor{2,} = (/nsubj|dobj/) | (/nsubj|dobj/ (prep pobj)? /appos|conj/)
+    location: Location? = xcomp? prep pobj
+    time: Temporal? = xcomp? prep pobj
+    
+- name: born
+  label: Event
+  priority: 3
+  pattern: |
+    trigger = [tag=/^V/ & lemma=/bear|born/]
+    subject: Person = /nsubj/
+    location: Location? = xcomp? prep? pobj
+    time: Temporal? = xcomp? prep? pobj
+    
+- name: attack
+  label: Event
+  priority: 4
+  pattern: |
+    trigger = [tag=/^V/ & lemma=/attack/]
+    subject: Actor = /nsubj/
+    effect: Effect? = >>
+    location: Location? = xcomp? prep? pobj
+    time: Temporal? = xcomp? prep? pobj
+

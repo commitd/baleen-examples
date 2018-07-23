@@ -1,0 +1,17 @@
+mongo:
+  db: baleen
+  host: localhost
+
+elasticsearch:
+  cluster: elasticsearch
+  host: localhost
+  
+collectionreader:
+- include: ./collectionreaders/example-files.yml
+
+annotators:
+- include: default.yml
+
+consumers:
+- Mongo
+- Elasticsearch

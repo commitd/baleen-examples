@@ -1,6 +1,6 @@
 # Baleen Examples
 
-This repo contains a set of example uses of Baleen]. It contains the pipeline and configurations required and includes docker commands to setup support services.
+This repo contains a set of example uses of [Baleen](https://github.com/dstl/baleen). It contains the pipeline and configurations required and includes docker commands to setup support services.
 
 
 # Requirements
